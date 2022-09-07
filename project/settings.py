@@ -9,11 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import django_heroku
-import os
 
-import dj_database_url
-from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,17 +21,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-015vr_q2^-5r)smr8jb2!e8x$u@n@kkn)(r^75=$$w5%(xrka3'
-
+import os
+# import django_heroku
+# import dj_database_url
+# from decouple import config
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
-# DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
 # ALLOWED_HOSTS = []
-DEBUG = False
-ALLOWED_HOSTS = ['*']
+DEBUG = True
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -135,7 +134,8 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static'),
 # ]
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
@@ -150,4 +150,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CSRF_COOKIE_SECURE = True 
 
 # later 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
+
+# no security
+CORS_REPLACE_HTTPS_REFERER      = False
+HOST_SCHEME                     = "http://"
+SECURE_PROXY_SSL_HEADER         = None
+SECURE_SSL_REDIRECT             = False
+SESSION_COOKIE_SECURE           = False
+CSRF_COOKIE_SECURE              = False
+SECURE_HSTS_SECONDS             = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
+SECURE_FRAME_DENY               = False
