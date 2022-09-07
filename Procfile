@@ -1,1 +1,1 @@
-web: gunicorn Stock.project.wsgi:app
+web: gunicorn project.project.wsgi:app
