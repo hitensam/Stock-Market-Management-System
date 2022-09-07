@@ -33,8 +33,8 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 # DEBUG = True
 
 # ALLOWED_HOSTS = []
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1']
+DEBUG = False
+ALLOWED_HOSTS = ['127.0.0.1', 'stocksexchange.herokuapp.com']
 
 # Application definition
 
@@ -122,7 +122,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
