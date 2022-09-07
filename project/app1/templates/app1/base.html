@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Login</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'app1/mod.css' %}"
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="">Stock Stats</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'app1:user' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'app1:addStock' %}">Add Stock</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'app1:stock'%}">Status</a>
+              </li>
+              <li class="nav-item">
+                <form action="{% url 'app1:logout' %}" method="get">
+                  {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Logout</button>
+              </form>
+              </li>
+          </ul>
+
+
+        </div>
+      </nav>
+    <body>
+      {% block message %}
+      {% endblock %}
+        {% block content %}
+        {% endblock %}
+
+        {% block mod %}
+        {% endblock %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" async defer></script>
+    </body>
+</html>

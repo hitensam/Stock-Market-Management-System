@@ -1,0 +1,41 @@
+{% extends 'app1/base.html' %}
+{% load static %}
+{% block content %}
+        <h1 style= "text-align: center;">{{message}}</h1>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Serial No.</th>
+                <th scope="col">Exchange Name</th>
+                <th scope="col">Code/Scrip</th>
+                <th scope="col">Stock Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col" style="text-align: center;">Purchase Price</th>
+                <th scope="col"  style="text-align: center;">Yesterday Price</th>
+                <th scope="col"  style="text-align: center;">Today Price</th>
+                
+
+              </tr>
+            </thead>
+            <tbody>
+                {% if data %}
+                <!-- {% firstof 1 as my_variable %} -->
+                {% for x in data %}
+                <tr>
+                    <th scope="row" class="sno"></th>
+                    <td>{{x.exchange}}</td>
+                    <td class="capitalise">{{x.code}}</td>
+                    <td>{{x.stock}}</td>
+                    <td>{{x.qty}}</td>
+                    <td class="purchase">{{x.purchase_price}}</td>
+                    <td class="comparison1">{{x.yesterday_price}}</td>
+                    <td class="comparison2">{{x.today_price}}</td>
+                  </tr>
+              {% endfor %}
+              {% endif %}   
+            </tbody>
+          </table>
+          {% endblock %}
+          {% block mod %}
+          <script src="{% static 'app1/modify.js' %}"></script>
+          {% endblock %}
