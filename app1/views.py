@@ -41,9 +41,9 @@ def User(request):
                 hashed = bcrypt.hashpw(bytes(user_pass, 'utf-8'), bcrypt.gensalt(14))
         # print(f"\n\nHASHED PASS EDIT : {hashed.decode()}\nNO EDIT : {hashed}\n\n")
                 send_data = user.objects.create(user_email=user_email, user_pass=hashed.decode())
-                return HttpResponse(f'user_email : {user_email}\n user_pass : {user_pass}')
+                return HttpResponse(f'user_email : {user_email}\n user_pass : {user_pass}. please login to continue.')
             if (flag):
-                return HttpResponse(f'user already exists')
+                return HttpResponse(f'user already exists, please login to continue.')
         except:
             user_email = str(request.POST['user_email'])
             user_pass = request.POST.get('user_pass'); 
@@ -58,7 +58,7 @@ def User(request):
                     request.session['user_logged'] = user_email
                     return redirect('/app1/stocks/')
                 else:
-                    return HttpResponse("wrong pass")
+                    return HttpResponse("wrong pass, please enter correct pass and continue.")
     else:
         if ('user_logged' in request.session):
             return redirect('/app1/stocks/')
@@ -74,17 +74,19 @@ def stock(request):
     if ('user_logged' in request.session):
         # return HttpResponse(f"session exists user_email : {request.session['user_logged']}")
         user_logged = stocks.objects.filter(user_email = request.session['user_logged']).all()
-#         for y in user_logged:
+        for y in user_logged:
 #             try:
 #                 # y.code = int(y.code)
 #                 y.yesterday_price = nse_exchange.get_quote(y.code)['previousClose']
 #                 y.today_price = nse_exchange.get_quote(y.code)['lastPrice']
 #                 y.save()
-#             except:
-#                 y.yesterday_price = bse_exchange.getQuote(y.code)['previousClose']
-#                 y.today_price = bse_exchange.getQuote(y.code)['currentValue']
-#                 y.save()
+            try:
+                y.yesterday_price = bse_exchange.getQuote(y.code)['previousClose']
+                y.today_price = bse_exchange.getQuote(y.code)['currentValue']
+                y.save()
 
+            except:
+                pass
         # print('\n\n',user_logged.today_price,'\n\n') 
        
         context = {'data' : user_logged, 'message' : f"Welcome {request.session['user_logged']}"}
