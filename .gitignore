@@ -1,2 +1,5 @@
 __pycache__/
 #To ignore cache file.
+
+db.sqlite3
+#ignored database updates.
