@@ -75,11 +75,12 @@ def stock(request):
         # return HttpResponse(f"session exists user_email : {request.session['user_logged']}")
         user_logged = stocks.objects.filter(user_email = request.session['user_logged']).all()
         for y in user_logged:
-#             try:
-#                 # y.code = int(y.code)
-#                 y.yesterday_price = nse_exchange.get_quote(y.code)['previousClose']
-#                 y.today_price = nse_exchange.get_quote(y.code)['lastPrice']
-#                 y.save()
+            try:
+                y.yesterday_price = nse_exchange.get_quote(y.code)['previousClose']
+                y.today_price = nse_exchange.get_quote(y.code)['lastPrice']
+                y.save()
+            except:
+                pass
             try:
                 y.yesterday_price = bse_exchange.getQuote(y.code)['previousClose']
                 y.today_price = bse_exchange.getQuote(y.code)['currentValue']
