@@ -5,3 +5,4 @@ __pycache__/
 #ignored database updates.
 db.sqlite3
 *.pyc
+*.pyc
